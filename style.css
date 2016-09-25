@@ -1,0 +1,26 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: open sans, calibri, arial;
+}
+
+h1 {
+	size: 30px;
+	margin: 5px;
+	line-height: 1.5;
+}
+
+td {
+	width: 250px;	
+	border: 1px;
+	padding: 2px;
+	text-align: center;
+}
+
+.done {
+	color: green;
+}
+
+.not-done {
+	color: red;
+}
