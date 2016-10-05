@@ -6,35 +6,34 @@
     </head>
 
     <body>
-	
+        <?php
+        include 'header.php';
+        ?>
+
 	<h1>Things that need to be done</h1>
 
 	<?php
-	$servername = "localhost";
-	$username = "todo";
-	$password = "list";
-	$dbname = "todo";
-	
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	include 'db.php';
 
-	// Check connection
-	if ($conn->connect_error) {
-	    printf("Connect failed: %s\n", $mysqli->connect_error);
-	    exit();
-	} 
-	
-	$sql = "SELECT task, deadline, done FROM todo_list ORDER BY deadline";
+        $order = htmlspecialchars($_GET["o"]);
+        if ($order === "") {
+                $order = "deadline";
+        }
+	$sql = "SELECT task, deadline, done FROM todo_list ORDER BY $order";
 	$result = $conn->query($sql);
-	
+
 	if ($result->num_rows > 0) {
-	    echo "<table> <tr> <th>Task</th> <th>Deadline</th> <th>Is it done?</th> </tr>";	    
-	    // output data of each row
-	    while($row = $result->fetch_assoc()) {
+                echo "<table> <tr>";
+                echo "<th><a href='/?o=task'>Task</a></th>";
+                echo "<th><a href='/?o=deadline'>Deadline</a></th>";
+                echo "<th><a href='/?o=done'>Is it done?</a></th> </tr>";
+
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
 		if($row["done"]){
-			echo "<tr class=\"done\">";
+			echo "<tr class='done'>";
 		} else {
-			echo "<tr class=\"not-done\">";
+			echo "<tr class='not-done'>";
 		}
 		echo "<td>".$row["task"]. "</td><td>" . $row["deadline"] . "</td><td>" . $row["done"]. "</td></tr>";
 	    }
@@ -46,6 +45,6 @@
 
 	$conn->close();
 	?>
-	
+
     </body>
 </html>

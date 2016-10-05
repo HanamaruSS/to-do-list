@@ -4,6 +4,16 @@ body {
 	font-family: open sans, calibri, arial;
 }
 
+a {
+	text-decoration: none;
+        color: black;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: blue;
+}
+
 h1 {
 	size: 30px;
 	margin: 5px;
@@ -11,7 +21,7 @@ h1 {
 }
 
 td {
-	width: 250px;	
+	width: 250px;
 	border: 1px;
 	padding: 2px;
 	text-align: center;
@@ -23,4 +33,9 @@ td {
 
 .not-done {
 	color: red;
+}
+
+.login {
+        text-align: center;
+        display: inline;
 }
