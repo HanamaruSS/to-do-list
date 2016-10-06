@@ -9,23 +9,23 @@ Database is in todo.sql (-u todo -plist)
 
 Database Structure
 
-+---------------------------+
-|	  todo_list	    |
-+---------------------------+
-| id		int	    |
-| task		varchar(32) |
-| deadline	date	    |
-| done		bool	    |
-| admin_id	int	    |
-+---------------------------+
 
-+---------------------------+
-|	    admin	    |
-+---------------------------+
-| id		int	    |
-| username	varchar(32) |
-| password	varchar(32) |
-+---------------------------+
+|	  todo_list |	    |
+:--------------|------------:
+| id		| int	    |
+| task		| varchar(32) |
+| deadline	| date	    |
+| done		| bool	    |
+| admin_id	| int	    |
+
+
+
+|	    admin |	    |
+:---------------|------------:
+| id		| int	    |
+| username	| varchar(32) |
+| password	| varchar(32) |
+
 
 
 Cannot login to database with 'root'@'localhost', idk why
