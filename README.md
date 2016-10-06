@@ -2,9 +2,10 @@
 
 
 Created a database (name: todo)
-Established some connection to database in index.php
-Database is in todo.sql (-u todo -plist)
 
+Established some connection to database in index.php
+
+Database is in todo.sql (-u todo -plist)
 
 Database Structure
 
