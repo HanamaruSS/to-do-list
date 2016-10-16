@@ -11,9 +11,11 @@
         </head>
 
         <body>
-                <?php include 'header.php' ?>
+                <?php require_once 'header.php' 
+		      require_once 'db.php';
+		?>
                 <?php
-                include 'db.php';
+                
 
                 if ($_SERVER["REQUEST_METHOD"] != "POST") {
                         $message = "An error has occured. Please try again.";

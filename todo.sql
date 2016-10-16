@@ -23,9 +23,10 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(32) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL
+  `password` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -48,7 +49,11 @@ DROP TABLE IF EXISTS `junction_table`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `junction_table` (
   `todo_id` int(11) DEFAULT NULL,
-  `tag_id` int(11) DEFAULT NULL
+  `tag_id` int(11) DEFAULT NULL,
+  KEY `fk_todo` (`todo_id`),
+  KEY `tag_id` (`tag_id`),
+  CONSTRAINT `junction_table_ibfk_1` FOREIGN KEY (`todo_id`) REFERENCES `todo_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `junction_table_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,7 +63,7 @@ CREATE TABLE `junction_table` (
 
 LOCK TABLES `junction_table` WRITE;
 /*!40000 ALTER TABLE `junction_table` DISABLE KEYS */;
-INSERT INTO `junction_table` VALUES (1,1),(1,2),(1,3),(4,1),(5,1),(5,4),(6,4),(2,5);
+INSERT INTO `junction_table` VALUES (1,1),(1,2),(1,3),(4,1),(5,1),(5,4),(6,4),(2,5),(7,2);
 /*!40000 ALTER TABLE `junction_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,8 +75,9 @@ DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tag` (
-  `id` int(11) DEFAULT NULL,
-  `tag` varchar(32) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `tag` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -93,11 +99,14 @@ DROP TABLE IF EXISTS `todo_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `todo_list` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `task` varchar(32) DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `done` tinyint(1) DEFAULT NULL,
-  `admin_id` int(11) DEFAULT NULL
+  `admin_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_admin` (`admin_id`),
+  CONSTRAINT `todo_list_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,7 +116,7 @@ CREATE TABLE `todo_list` (
 
 LOCK TABLES `todo_list` WRITE;
 /*!40000 ALTER TABLE `todo_list` DISABLE KEYS */;
-INSERT INTO `todo_list` VALUES (1,'make to-do list','2016-10-04',0,1),(2,'do laundry','2016-09-25',1,1),(3,'return iron to Bona','2016-09-30',0,1),(4,'return transponder to Anthony','2016-09-24',1,1),(5,'stalk Herbert','2100-12-31',0,1),(6,'asdfasdf','2100-11-15',1,1);
+INSERT INTO `todo_list` VALUES (1,'make to-do list','2016-10-13',0,1),(2,'do laundry','2016-09-25',1,1),(3,'return iron to Bona','2016-09-30',0,1),(4,'return transponder to Anthony','2016-09-24',1,1),(5,'stalk Herbert','2100-12-31',0,1),(6,'asdfasdf','2100-11-15',1,1),(7,'present todolist','2016-10-06',0,1);
 /*!40000 ALTER TABLE `todo_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -120,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-06  0:15:59
+-- Dump completed on 2016-10-17  0:07:20
